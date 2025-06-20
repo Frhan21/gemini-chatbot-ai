@@ -28,6 +28,10 @@ const model = genAI.getGenerativeModel({
   },
 });
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+});
+
 // Route api/chat
 app.post("/api/chat", async (req, res) => {
   const { userMessage } = req.body.message;
