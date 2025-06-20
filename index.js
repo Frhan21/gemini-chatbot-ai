@@ -4,6 +4,7 @@
 // import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const express = require("express");
+const path = require('path')
 
 require("dotenv").config();
 
@@ -17,7 +18,8 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static("public"));
+// Serve static files from the 'public' directory
+app.use(express.static('public'));
 
 // Gemini setup
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -29,7 +31,7 @@ const model = genAI.getGenerativeModel({
 });
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+  res.sendFile('/public/index.html');
 });
 
 // Route api/chat
